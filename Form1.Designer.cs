@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
             this.bCompare = new System.Windows.Forms.Button();
             this.bStop = new System.Windows.Forms.Button();
@@ -46,6 +47,7 @@
             this.вставитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьЗначенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьСтрокиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +63,15 @@
             this.col1,
             this.col2,
             this.col3});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle2;
+            this.grid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.grid.Location = new System.Drawing.Point(1, 0);
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(633, 331);
@@ -211,6 +222,14 @@
             this.удалитьСтрокиToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.удалитьСтрокиToolStripMenuItem.Text = "Удалить строки";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(638, 68);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(152, 13);
+            this.progressBar1.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +245,7 @@
             this.Controls.Add(this.bStop);
             this.Controls.Add(this.bCompare);
             this.Controls.Add(this.grid);
+            this.Controls.Add(this.progressBar1);
             this.Name = "Form1";
             this.Text = "Simple comparator";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -256,6 +276,7 @@
         private System.Windows.Forms.ToolStripMenuItem вставитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьЗначенияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьСтрокиToolStripMenuItem;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

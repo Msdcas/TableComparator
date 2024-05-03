@@ -77,7 +77,7 @@ public static class Comparator
             }
             ProgressSender?.Invoke(0);
             ProcessErrors();
-            CalcFinished?.Invoke();
+            _EventCalcFinished?.Invoke();
         }
 
         public static void CompareLineByLine(DataGridView grid, string columnCompareMain,
@@ -115,7 +115,7 @@ public static class Comparator
 
             ProgressSender?.Invoke(0);
             ProcessErrors();
-            CalcFinished?.Invoke();
+            _EventCalcFinished?.Invoke();
         }
 
         private static void ClearResultColumn(DataGridView grid, string resultColName)
@@ -151,10 +151,8 @@ public static class Comparator
 
         private static void CalcFinishHandler()
         {
-            //if (CalcFinished.Method.)
-            //{
-
-            //}
+            CalcFinished.Invoke();
+            
         }
 
 

@@ -189,11 +189,16 @@ namespace TableComparator
             }
         }
 
+        private void test()
+        {
+            bCompare.Enabled = true;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Comparator.RichTextBox = this.richTextBox1;
-            //Comparator.ProgressBar = this.progressBar1;
-            Comparator.CalcFinished = bStop.PerformClick;
+            Comparator.ProgressBar = this.progressBar1;
+            Comparator.CalcFinished = test;
 
             cmFilterMethod.SelectedIndex = 0;
         }
