@@ -8,22 +8,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TableComparator.Classes
-{
+{        /// при сравнении массив цвета всегда привязан ко 1му столбцу и считается определяющим есть ли эквивалент во 2м столбце
+
 public static class Comparator
 {
-    /// при сравнении массив цвета всегда привязан ко 1му столбцу и считается определяющим есть ли эквивалент во 2м столбце
-        private delegate void DMethodDeleg(Control control, object value);
-        private delegate void DCommonNotifyer(object progress);
+        public delegate void DProgressChange(int progress);
+        public static DProgressChange ProgressChange;
 
-        public static ProgressBar ProgressBar;
-        private static DCommonNotifyer ProgressSender = value => HandleEvent(ProgressBar, value);
-
-        public static RichTextBox RichTextBox;
-        private static DCommonNotifyer EventSender = text => HandleEvent(RichTextBox, text);
-        private static List<string> _Errors = new List<string>();
+        public delegate void DelProgressChange(string message);
+        public static DelProgressChange CalcEvent;
+        private static List<string> _Messages = new List<string>();
 
         public static Action CalcFinished;
-        private static Action _EventCalcFinished = CalcFinishHandler;
 
         public static void CompareEachWithEachAndRecolor(DataGridView grid, string columnCompareMain,
             string columnCompareSlave, string columnOut, CancellationToken cancellation)
@@ -67,7 +63,7 @@ public static class Comparator
                 else
                     grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Red;
 
-                ProgressSender?.Invoke(i * 100 / grid.RowCount);
+                ProgressChange?.Invoke(i * 100 / grid.RowCount);
 
                 if (cancellation.IsCancellationRequested)
                 {
@@ -75,9 +71,9 @@ public static class Comparator
                     break;
                 }
             }
-            ProgressSender?.Invoke(0);
+            ProgressChange?.Invoke(0);
             ProcessErrors();
-            _EventCalcFinished?.Invoke();
+            CalcFinished?.Invoke();
         }
 
         public static void CompareLineByLine(DataGridView grid, string columnCompareMain,
@@ -104,7 +100,7 @@ public static class Comparator
                 else
                     grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.FromArgb(200, Color.Red);
 
-                ProgressSender?.Invoke(i * 100 / grid.RowCount);
+                ProgressChange?.Invoke(i * 100 / grid.RowCount);
 
                 if (cancellation.IsCancellationRequested)
                 {
@@ -113,9 +109,9 @@ public static class Comparator
                 }
             }
 
-            ProgressSender?.Invoke(0);
+            ProgressChange?.Invoke(0);
             ProcessErrors();
-            _EventCalcFinished?.Invoke();
+            CalcFinished?.Invoke();
         }
 
         private static void ClearResultColumn(DataGridView grid, string resultColName)
@@ -136,57 +132,17 @@ public static class Comparator
 
         private static void AddError(string message)
         {
-            if (!_Errors.Contains(message))
-            { _Errors.Add(message); }
+            if (!_Messages.Contains(message))
+                _Messages.Add(message);
         }
 
         private static void ProcessErrors()
         {
-            foreach (var error in _Errors)
+            foreach (var error in _Messages)
             {
-                EventSender?.Invoke(error);
+                CalcEvent?.Invoke(error);
             }
-            _Errors.Clear();
-        }
-
-        private static void CalcFinishHandler()
-        {
-            CalcFinished.Invoke();
-            
-        }
-
-
-        private static void HandleEvent(Control control, object value)
-        {
-            if (control == null) return;
-            try
-            {
-                if (control.InvokeRequired)
-                {
-                    DMethodDeleg d = new DMethodDeleg(HandleEvent);
-                    control.Invoke(d, new object[] { value });
-                }
-                else
-                {
-                    if (control.GetType() == typeof(ProgressBar))
-                    {
-                        ProgressBar.Value = (int)value;
-                    }
-                    if (control.GetType() == typeof(RichTextBox))
-                        if (!string.IsNullOrEmpty((string)value))
-                        {
-                            string time = DateTime.Now.ToString("dd.MM HH:mm:ss");
-                            StringBuilder sb = new StringBuilder(time + "  " + value);
-                            sb.AppendLine();
-                            sb.AppendLine(control.Text);
-                            control.Text = sb.ToString();
-                        }
-
-
-                    Console.WriteLine(value.ToString());
-                }
-            }
-            catch { }
+            _Messages.Clear();
         }
 
 

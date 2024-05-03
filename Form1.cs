@@ -189,18 +189,48 @@ namespace TableComparator
             }
         }
 
-        private void test()
-        {
-            bCompare.Enabled = true;
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            Comparator.RichTextBox = this.richTextBox1;
-            Comparator.ProgressBar = this.progressBar1;
-            Comparator.CalcFinished = test;
+            Comparator.ProgressChange = x => HandleEvent(progressBar1, sender);
+            Comparator.CalcEvent = x => HandleEvent(richTextBox1, sender);
+            //Comparator.CalcFinished = x => HandleEvent(null, null);
 
             cmFilterMethod.SelectedIndex = 0;
         }
+
+        private delegate void DHandleDeleg(Control control, object obj);
+        private void HandleEvent(Control control, object value)
+        {
+            try
+            {
+                if (control.InvokeRequired)
+                {
+                    DHandleDeleg d = new DHandleDeleg(HandleEvent);
+                    control.Invoke(d, new object[] { value });
+                }
+                else
+                {
+                    if (control.GetType() == typeof(ProgressBar))
+                    {
+                        progressBar1.Value = (int)value;
+                    }
+                    if (control.GetType() == typeof(RichTextBox))
+                        if (!string.IsNullOrEmpty((string)value))
+                        {
+                            string time = DateTime.Now.ToString("dd.MM HH:mm:ss");
+                            StringBuilder sb = new StringBuilder(time + "  " + value);
+                            sb.AppendLine();
+                            sb.AppendLine(control.Text);
+                            control.Text = sb.ToString();
+                        }
+
+                    Console.WriteLine(value.ToString());
+                }
+            }
+            catch { }
+        }
+
+
+
     }
 }
