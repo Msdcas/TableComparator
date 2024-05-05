@@ -29,8 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
+            this.col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bCompare = new System.Windows.Forms.Button();
             this.bStop = new System.Windows.Forms.Button();
             this.cmFilterMethod = new System.Windows.Forms.ComboBox();
@@ -39,9 +42,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.копироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вставитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,6 @@
             // 
             // grid
             // 
-            this.grid.AllowUserToAddRows = false;
             this.grid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -63,14 +62,14 @@
             this.col1,
             this.col2,
             this.col3});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle1;
             this.grid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.grid.Location = new System.Drawing.Point(1, 0);
             this.grid.Name = "grid";
@@ -78,6 +77,25 @@
             this.grid.TabIndex = 0;
             this.grid.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.grid_RowPrePaint);
             this.grid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grid_KeyUp);
+            // 
+            // col1
+            // 
+            this.col1.HeaderText = "Сравниваемое";
+            this.col1.Name = "col1";
+            this.col1.Width = 200;
+            // 
+            // col2
+            // 
+            this.col2.HeaderText = "Сравнивающее";
+            this.col2.Name = "col2";
+            this.col2.Width = 200;
+            // 
+            // col3
+            // 
+            this.col3.HeaderText = "Уникальные";
+            this.col3.Name = "col3";
+            this.col3.ReadOnly = true;
+            this.col3.Width = 190;
             // 
             // bCompare
             // 
@@ -151,9 +169,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Enabled = false;
             this.richTextBox1.Location = new System.Drawing.Point(638, 278);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(211, 53);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
@@ -168,25 +186,6 @@
             this.button5.TabIndex = 8;
             this.button5.Text = "Уникальные → Сравнивающее";
             this.button5.UseVisualStyleBackColor = false;
-            // 
-            // col1
-            // 
-            this.col1.HeaderText = "Сравниваемое";
-            this.col1.Name = "col1";
-            this.col1.Width = 200;
-            // 
-            // col2
-            // 
-            this.col2.HeaderText = "Сравнивающее";
-            this.col2.Name = "col2";
-            this.col2.Width = 200;
-            // 
-            // col3
-            // 
-            this.col3.HeaderText = "Уникальные";
-            this.col3.Name = "col3";
-            this.col3.ReadOnly = true;
-            this.col3.Width = 190;
             // 
             // contextMenuStrip1
             // 

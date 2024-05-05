@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TableComparator.Classes
 {        /// при сравнении массив цвета всегда привязан ко 1му столбцу и считается определяющим есть ли эквивалент во 2м столбце
 
-public static class Comparator
+    public static class Comparator
 {
         public delegate void DProgressChange(int progress);
         public static DProgressChange ProgressChange;
@@ -27,7 +24,6 @@ public static class Comparator
             ClearResultColumn(grid, columnOut);
 
             int resColInd = 0;
-            //int emptyCellsTogether = 0;
 
             for (int i = 0; i < grid.RowCount; i++)
             {
@@ -71,7 +67,7 @@ public static class Comparator
                     break;
                 }
             }
-            ProgressChange?.Invoke(0);
+            ProgressChange?.Invoke(100);
             ProcessErrors();
             CalcFinished?.Invoke();
         }
@@ -94,11 +90,11 @@ public static class Comparator
                 if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() != grid.Rows[i].Cells[columnCompareSlave].Value.ToString())
                 {
                     grid.Rows[resColInd].Cells[columnOut].Value = grid.Rows[i].Cells[columnCompareMain].Value;
-                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.FromArgb(200, Color.Green);
+                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Green;
                     resColInd++;
                 }
                 else
-                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.FromArgb(200, Color.Red);
+                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Red;
 
                 ProgressChange?.Invoke(i * 100 / grid.RowCount);
 
@@ -109,7 +105,7 @@ public static class Comparator
                 }
             }
 
-            ProgressChange?.Invoke(0);
+            ProgressChange?.Invoke(100);
             ProcessErrors();
             CalcFinished?.Invoke();
         }

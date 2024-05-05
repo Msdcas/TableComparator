@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace TableComparator
         public delegate void ErrorHandler(string message, Exception exception);
         public static ErrorHandler ErrHandler;
         private Thread ThreadCalc = null;
-        private CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource CancellationTokenSource;
 
         private static void PasteTSV(DataGridView grid)
         {
@@ -122,7 +123,17 @@ namespace TableComparator
             {
                 PasteTSV(grid);
             }
+
+        //    CheckCountRowsAndDisableAutoRow();
         }
+
+        //private void CheckCountRowsAndDisableAutoRow()
+        //{
+        //    if (grid.Rows.Count > 0)
+        //        grid.AllowUserToAddRows= false;
+        //    else
+        //        grid.AllowUserToDeleteRows= true;
+        //}
 
         private void bCopyResult_Click(object sender, EventArgs e)
         {
@@ -172,6 +183,8 @@ namespace TableComparator
                     {
                         Comparator.CompareEachWithEachAndRecolor(grid, "col1", "col2", "col3", CancellationTokenSource.Token);
                     }); break;
+                default:
+                    return;
             }
             ThreadCalc.Start();
             bCompare.Enabled = false;
@@ -179,14 +192,14 @@ namespace TableComparator
 
         private void bStop_Click(object sender, EventArgs e)
         {
-            fuck();
+            HandlerCalcFinished(null);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Comparator.ProgressChange = x => HandleEvent(progressBar1, sender);
-            Comparator.CalcEvent = x => HandleEvent(richTextBox1, sender);
-            Comparator.CalcFinished = fuck;
+            Comparator.ProgressChange = sendParam => HandleEvent(progressBar1, HandlerProgressChange, sendParam);
+            Comparator.CalcEvent = sendParam => HandleEvent(richTextBox1, HandlerCalcEvent, sendParam);
+            Comparator.CalcFinished = () => HandleEvent(bCompare, HandlerCalcFinished, null);
 
             cmFilterMethod.SelectedIndex = 0;
         }
@@ -195,60 +208,58 @@ namespace TableComparator
         /// <summary>
         /// bStop_PerformanceClick if InvokeRequired
         /// </summary>
-        private void fuck()
+        private void HandlerCalcFinished(object pass)
         {
-            if (bCompare.InvokeRequired)
+            if (CancellationTokenSource != null)
             {
-                Action action = fuck;
-                bCompare.Invoke(action);
+                CancellationTokenSource.Cancel();
+                CancellationTokenSource.Dispose();
+                CancellationTokenSource = null;
+                ThreadCalc = null;
             }
-            else
-            {
-                if (ThreadCalc != null)
-                {
-                    CancellationTokenSource.Cancel();
+            bCompare.Enabled = true;
+            progressBar1.Value = 0;
+            richTextBox1.Clear();
 
-                    CancellationTokenSource.Dispose();
-                    ThreadCalc = null;
-                    bCompare.Enabled = true;
-                }
+            Console.WriteLine("\n finished event click ====================================\n");
+        }
+
+        private void HandlerProgressChange(object value)
+        {
+            progressBar1.Value = (int)value;
+            //if (value is int progress)  //also good work
+            //{
+            //    progressBar1.Invoke((MethodInvoker)delegate { progressBar1.Value = progress; });
+            //}
+        }
+
+        private void HandlerCalcEvent(object value)
+        {
+            if (!string.IsNullOrEmpty((string)value))
+            {
+                string time = DateTime.Now.ToString("dd.MM HH:mm:ss");
+                StringBuilder sb = new StringBuilder(time + "  " + value);
+                sb.AppendLine();
+                sb.AppendLine(richTextBox1.Text);
+                richTextBox1.Text = sb.ToString();
             }
         }
 
-        private void HandlerProgressChange()
-        {
 
-        }
-
-
-
-        private delegate void DHandleDeleg(Control control, object obj);
-        private void HandleEvent(Control control, object value)
+        private delegate void DHandleDeleg(Control control, Action<object> func, object value);
+        private void HandleEvent(Control control, Action<object> method, object value)
         {
             try
             {
                 if (control.InvokeRequired)
                 {
-                    DHandleDeleg d = new DHandleDeleg(HandleEvent);
-                    control.Invoke(d, new object[] { value });
+                    //DHandleDeleg d = new DHandleDeleg(HandleEvent);
+                    //control.Invoke(d, new object[] { value });
+                    control.Invoke(new Action(() => method.Invoke(value)));
                 }
                 else
                 {
-                    if (control.GetType() == typeof(ProgressBar))
-                    {
-                        progressBar1.Value = (int)value;
-                    }
-                    if (control.GetType() == typeof(RichTextBox))
-                        if (!string.IsNullOrEmpty((string)value))
-                        {
-                            string time = DateTime.Now.ToString("dd.MM HH:mm:ss");
-                            StringBuilder sb = new StringBuilder(time + "  " + value);
-                            sb.AppendLine();
-                            sb.AppendLine(control.Text);
-                            control.Text = sb.ToString();
-                        }
-
-                    Console.WriteLine(value.ToString());
+                    method.Invoke(value);
                 }
             }
             catch { }
