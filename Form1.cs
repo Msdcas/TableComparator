@@ -21,7 +21,7 @@ namespace TableComparator
 
         public delegate void ErrorHandler(string message, Exception exception);
         public static ErrorHandler ErrHandler;
-        private Thread CalcThread = null;
+        private Thread ThreadCalc = null;
         private CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         private static void PasteTSV(DataGridView grid)
@@ -163,40 +163,64 @@ namespace TableComparator
             switch (cmFilterMethod.SelectedIndex)
             {
                 case 0:
-                    CalcThread = new Thread(() =>
+                    ThreadCalc = new Thread(() =>
                     {
                         Comparator.CompareLineByLine(grid, "col1", "col2", "col3", CancellationTokenSource.Token);
                     }); break;
                 case 1:
-                    CalcThread = new Thread(() =>
+                    ThreadCalc = new Thread(() =>
                     {
                         Comparator.CompareEachWithEachAndRecolor(grid, "col1", "col2", "col3", CancellationTokenSource.Token);
                     }); break;
             }
-            CalcThread.Start();
+            ThreadCalc.Start();
             bCompare.Enabled = false;
         }
 
         private void bStop_Click(object sender, EventArgs e)
         {
-            if (CalcThread != null)
-            {
-                CancellationTokenSource.Cancel();
-
-                CancellationTokenSource.Dispose();
-                CalcThread = null;
-                bCompare.Enabled = true;
-            }
+            fuck();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Comparator.ProgressChange = x => HandleEvent(progressBar1, sender);
             Comparator.CalcEvent = x => HandleEvent(richTextBox1, sender);
-            //Comparator.CalcFinished = x => HandleEvent(null, null);
+            Comparator.CalcFinished = fuck;
 
             cmFilterMethod.SelectedIndex = 0;
         }
+
+        // костыль
+        /// <summary>
+        /// bStop_PerformanceClick if InvokeRequired
+        /// </summary>
+        private void fuck()
+        {
+            if (bCompare.InvokeRequired)
+            {
+                Action action = fuck;
+                bCompare.Invoke(action);
+            }
+            else
+            {
+                if (ThreadCalc != null)
+                {
+                    CancellationTokenSource.Cancel();
+
+                    CancellationTokenSource.Dispose();
+                    ThreadCalc = null;
+                    bCompare.Enabled = true;
+                }
+            }
+        }
+
+        private void HandlerProgressChange()
+        {
+
+        }
+
+
 
         private delegate void DHandleDeleg(Control control, object obj);
         private void HandleEvent(Control control, object value)
