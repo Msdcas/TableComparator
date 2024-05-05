@@ -29,7 +29,7 @@ namespace TableComparator.Classes
             {
                 if (string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareMain].Value?.ToString()))
                 {
-                    AddError($">Найдена пустая ячейка в первом столбце в строке {i}");
+                    AddError($">Найдена пустая ячейка в первом столбце в строке {i+1}");
                     continue;
                 }
 
@@ -38,7 +38,7 @@ namespace TableComparator.Classes
                 {
                     if (string.IsNullOrEmpty(grid.Rows[j].Cells[columnCompareSlave].Value?.ToString()))
                     {
-                        AddError($">Найдена пустая ячейка во втором столбце в строке {j}");
+                        AddError($">Найдена пустая ячейка во втором столбце в строке {j+1}");
                         continue;
                     }
 
@@ -83,7 +83,7 @@ namespace TableComparator.Classes
                 if (string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareMain].Value?.ToString()) ||
                     string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareSlave].Value?.ToString()))
                 {
-                    AddError($">Найдена пустая ячейка в {i} строке");
+                    AddError($">Найдена пустая ячейка в {i+1} строке");
                     continue;
                 }
 

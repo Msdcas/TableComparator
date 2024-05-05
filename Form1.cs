@@ -15,6 +15,10 @@ namespace TableComparator
 {
     public partial class Form1 : Form
     {
+        // при вставке нового массива значений последняя строка переносится в низ
+        // при повторном расчете он происходит слишком быстро, что странно
+
+
         public Form1()
         {
             InitializeComponent();
@@ -113,6 +117,7 @@ namespace TableComparator
                 {
                     foreach (DataGridViewRow row in grid.SelectedRows)
                     {
+                        if (row.Index == grid.RowCount - 1) break; // because grid.AllowUserToAddRows = true by default. Cant del last row
                         grid.Rows.RemoveAt(row.Index);
                         grid.Refresh();
                     }
@@ -124,16 +129,7 @@ namespace TableComparator
                 PasteTSV(grid);
             }
 
-        //    CheckCountRowsAndDisableAutoRow();
         }
-
-        //private void CheckCountRowsAndDisableAutoRow()
-        //{
-        //    if (grid.Rows.Count > 0)
-        //        grid.AllowUserToAddRows= false;
-        //    else
-        //        grid.AllowUserToDeleteRows= true;
-        //}
 
         private void bCopyResult_Click(object sender, EventArgs e)
         {
@@ -186,6 +182,9 @@ namespace TableComparator
                 default:
                     return;
             }
+            progressBar1.Value = 0;
+            richTextBox1.Clear();
+
             ThreadCalc.Start();
             bCompare.Enabled = false;
         }
@@ -218,10 +217,6 @@ namespace TableComparator
                 ThreadCalc = null;
             }
             bCompare.Enabled = true;
-            progressBar1.Value = 0;
-            richTextBox1.Clear();
-
-            Console.WriteLine("\n finished event click ====================================\n");
         }
 
         private void HandlerProgressChange(object value)
@@ -237,8 +232,9 @@ namespace TableComparator
         {
             if (!string.IsNullOrEmpty((string)value))
             {
-                string time = DateTime.Now.ToString("dd.MM HH:mm:ss");
-                StringBuilder sb = new StringBuilder(time + "  " + value);
+                StringBuilder sb = new StringBuilder(value.ToString());
+                //string time = DateTime.Now.ToString("dd.MM HH:mm:ss");
+                //StringBuilder sb = new StringBuilder(time + "  " + value);
                 sb.AppendLine();
                 sb.AppendLine(richTextBox1.Text);
                 richTextBox1.Text = sb.ToString();
