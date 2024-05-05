@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TableComparator.Classes;
 
@@ -17,7 +10,8 @@ namespace TableComparator
     {
         // при вставке нового массива значений последняя строка переносится в низ
         // при повторном расчете он происходит слишком быстро, что странно
-
+        // реализовать через паттерн наблюдатель работу с таблицей, а не юзать ее напрямую
+        // доработать функционал кнопок и чекбоксов
 
         public Form1()
         {

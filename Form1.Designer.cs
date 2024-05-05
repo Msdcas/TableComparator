@@ -48,6 +48,7 @@
             this.удалитьЗначенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьСтрокиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.chbCompareWithEmptyCells = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -102,7 +103,7 @@
             this.bCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bCompare.BackColor = System.Drawing.SystemColors.Window;
             this.bCompare.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bCompare.Location = new System.Drawing.Point(638, 42);
+            this.bCompare.Location = new System.Drawing.Point(638, 65);
             this.bCompare.Name = "bCompare";
             this.bCompare.Size = new System.Drawing.Size(153, 36);
             this.bCompare.TabIndex = 1;
@@ -113,7 +114,7 @@
             // bStop
             // 
             this.bStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bStop.Location = new System.Drawing.Point(797, 44);
+            this.bStop.Location = new System.Drawing.Point(797, 67);
             this.bStop.Name = "bStop";
             this.bStop.Size = new System.Drawing.Size(29, 32);
             this.bStop.TabIndex = 2;
@@ -224,10 +225,20 @@
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(638, 68);
+            this.progressBar1.Location = new System.Drawing.Point(638, 91);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(152, 13);
             this.progressBar1.TabIndex = 10;
+            // 
+            // chbCompareWithEmptyCells
+            // 
+            this.chbCompareWithEmptyCells.AutoSize = true;
+            this.chbCompareWithEmptyCells.Location = new System.Drawing.Point(640, 42);
+            this.chbCompareWithEmptyCells.Name = "chbCompareWithEmptyCells";
+            this.chbCompareWithEmptyCells.Size = new System.Drawing.Size(194, 17);
+            this.chbCompareWithEmptyCells.TabIndex = 11;
+            this.chbCompareWithEmptyCells.Text = "Сравнивать с пустыми строками";
+            this.chbCompareWithEmptyCells.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -235,6 +246,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(851, 332);
+            this.Controls.Add(this.chbCompareWithEmptyCells);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button4);
@@ -276,6 +288,7 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьЗначенияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьСтрокиToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox chbCompareWithEmptyCells;
     }
 }
 
