@@ -9,19 +9,21 @@ namespace TableComparator.Classes
 
     public static class Comparator
 {
+        public static bool CompareWithEmptyCells = false;
+
         public delegate void DProgressChange(int progress);
         public static DProgressChange ProgressChange;
 
         public delegate void DelProgressChange(string message);
         public static DelProgressChange CalcEvent;
-        private static List<string> _Messages = new List<string>();
-
         public static Action CalcFinished;
+
+        private static List<string> _Messages = new List<string>();      
 
         public static void CompareEachWithEachAndRecolor(DataGridView grid, string columnCompareMain,
             string columnCompareSlave, string columnOut, CancellationToken cancellation)
         {
-            ClearResultColumn(grid, columnOut);
+            ClearResultColumn(grid);
 
             int resColInd = 0;
 
@@ -39,11 +41,11 @@ namespace TableComparator.Classes
                     if (string.IsNullOrEmpty(grid.Rows[j].Cells[columnCompareSlave].Value?.ToString()))
                     {
                         AddError($">Найдена пустая ячейка во втором столбце в строке {j+1}");
-                        continue;
+                        if (!CompareWithEmptyCells) continue;
                     }
 
                     if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() ==
-                                grid.Rows[j].Cells[columnCompareSlave].Value.ToString())
+                        grid.Rows[j].Cells[columnCompareSlave].Value?.ToString())
                     {
                         isUniq = false;
                         break;
@@ -60,33 +62,35 @@ namespace TableComparator.Classes
                     grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Red;
 
                 ProgressChange?.Invoke(i * 100 / grid.RowCount);
+                Console.WriteLine(i * 100 / grid.RowCount);
 
-                if (cancellation.IsCancellationRequested)
-                {
-                    ResetCellColor(grid, columnCompareMain, Color.White);
-                    break;
-                }
+                if (cancellation.IsCancellationRequested) break;
             }
             ProgressChange?.Invoke(100);
             ProcessErrors();
             CalcFinished?.Invoke();
+
+            Console.WriteLine("finish");
         }
 
         public static void CompareLineByLine(DataGridView grid, string columnCompareMain,
             string columnCompareSlave, string columnOut, CancellationToken cancellation)
         {
-            ClearResultColumn(grid, columnOut);
+            ClearResultColumn(grid);
 
             int resColInd = 0;
             for (int i = 0; i < grid.RowCount; i++)
             {
-                if (string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareMain].Value?.ToString()) ||
-                    string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareSlave].Value?.ToString()))
+                if (string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareMain].Value?.ToString()))
                 {
                     AddError($">Найдена пустая ячейка в {i+1} строке");
                     continue;
                 }
-
+                if (string.IsNullOrEmpty(grid.Rows[i].Cells[columnCompareSlave].Value?.ToString()))
+                {
+                    AddError($">Найдена пустая ячейка в {i + 1} строке");
+                    if (!CompareWithEmptyCells) continue;
+                }
                 if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() != grid.Rows[i].Cells[columnCompareSlave].Value.ToString())
                 {
                     grid.Rows[resColInd].Cells[columnOut].Value = grid.Rows[i].Cells[columnCompareMain].Value;
@@ -98,11 +102,7 @@ namespace TableComparator.Classes
 
                 ProgressChange?.Invoke(i * 100 / grid.RowCount);
 
-                if (cancellation.IsCancellationRequested)
-                {
-                    ResetCellColor(grid, columnCompareMain, Color.White);
-                    break;
-                }
+                if (cancellation.IsCancellationRequested) break;
             }
 
             ProgressChange?.Invoke(100);
@@ -110,19 +110,12 @@ namespace TableComparator.Classes
             CalcFinished?.Invoke();
         }
 
-        private static void ClearResultColumn(DataGridView grid, string resultColName)
+        private static void ClearResultColumn(DataGridView grid)
         {
             for (int i = 0; i < grid.Rows.Count; i++)
             {
-                grid.Rows[i].Cells[resultColName].Value = string.Empty;
-            }
-        }
-
-        private static void ResetCellColor(DataGridView grid, string nameColumn, Color color)
-        {
-            for (int i = 0; i < grid.Rows.Count; i++)
-            {
-                grid.Rows[i].Cells[nameColumn].Style.BackColor = Color.FromArgb(128, color);
+                grid.Rows[i].Cells[2].Value = string.Empty;
+                grid.Rows[i].Cells[0].Style.BackColor = Color.White;
             }
         }
 

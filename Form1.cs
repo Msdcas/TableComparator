@@ -8,10 +8,7 @@ namespace TableComparator
 {
     public partial class Form1 : Form
     {
-        // при вставке нового массива значений последняя строка переносится в низ
-        // при повторном расчете он происходит слишком быстро, что странно
         // реализовать через паттерн наблюдатель работу с таблицей, а не юзать ее напрямую
-        // доработать функционал кнопок и чекбоксов
 
         public Form1()
         {
@@ -28,7 +25,6 @@ namespace TableComparator
             char[] rowSplitter = { '\r', '\n' };
             char[] columnSplitter = { '\t' };
 
-            // Get the text from clipboard
             IDataObject dataInClipboard = Clipboard.GetDataObject();
             string stringInClipboard = (string)dataInClipboard.GetData(DataFormats.Text);
 
@@ -62,7 +58,6 @@ namespace TableComparator
                 // Cycle through cell values
                 for (int iCol = 0; iCol < valuesInRow.Length; iCol++)
                 {
-
                     // Assign cell value, only if it within columns of the grid
                     if (grid.ColumnCount - 1 >= c + iCol)
                     {
@@ -95,6 +90,8 @@ namespace TableComparator
 
         private void grid_KeyUp(object sender, KeyEventArgs e)
         {
+            if (grid.ReadOnly) return;
+
             if ((e.Shift && e.KeyCode == Keys.Insert) || (e.Control && e.KeyCode == Keys.V))
             {
                 PasteTSV(grid);
@@ -116,14 +113,22 @@ namespace TableComparator
                         grid.Refresh();
                     }
                 }
-                grid.Refresh();
             }
             if (e.Control && e.KeyCode == Keys.C)
             {
-                PasteTSV(grid);
+                
             }
-
+            grid.Refresh();
         }
+
+        private void CopySelectedCellsToClipboard()
+        {
+            foreach (DataGridViewRow row in grid.SelectedRows)
+            {
+
+            }
+        }
+
 
         private void bCopyResult_Click(object sender, EventArgs e)
         {
@@ -169,6 +174,7 @@ namespace TableComparator
                         Comparator.CompareLineByLine(grid, "col1", "col2", "col3", CancellationTokenSource.Token);
                     }); break;
                 case 1:
+                    //Comparator.CompareEachWithEachAndRecolor(grid, "col1", "col2", "col3", CancellationTokenSource.Token);
                     ThreadCalc = new Thread(() =>
                     {
                         Comparator.CompareEachWithEachAndRecolor(grid, "col1", "col2", "col3", CancellationTokenSource.Token);
@@ -179,6 +185,7 @@ namespace TableComparator
             progressBar1.Value = 0;
             richTextBox1.Clear();
 
+            grid.ReadOnly = true;
             ThreadCalc.Start();
             bCompare.Enabled = false;
         }
@@ -197,10 +204,6 @@ namespace TableComparator
             cmFilterMethod.SelectedIndex = 0;
         }
 
-        // костыль
-        /// <summary>
-        /// bStop_PerformanceClick if InvokeRequired
-        /// </summary>
         private void HandlerCalcFinished(object pass)
         {
             if (CancellationTokenSource != null)
@@ -211,6 +214,7 @@ namespace TableComparator
                 ThreadCalc = null;
             }
             bCompare.Enabled = true;
+            grid.ReadOnly = false;
         }
 
         private void HandlerProgressChange(object value)
@@ -255,7 +259,63 @@ namespace TableComparator
             catch { }
         }
 
+        private void chbCompareWithEmptyCells_CheckedChanged(object sender, EventArgs e)
+        {
+            Comparator.CompareWithEmptyCells = chbCompareWithEmptyCells.Checked;
+        }
 
+        private void cmFilterMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmFilterMethod.SelectedIndex != 0)
+            {
+                chbCompareWithEmptyCells.Checked = false;
+                chbCompareWithEmptyCells.Enabled = false;
+            }
+            else
+                chbCompareWithEmptyCells.Enabled= true;
+        }
 
+        private void bAddRow_Click(object sender, EventArgs e)
+        {
+            if (grid.ReadOnly) return;
+            grid.Rows.Add();
+
+        }
+
+        private void bDelRow_Click(object sender, EventArgs e)
+        {
+            if (grid.ReadOnly) return;
+
+            foreach (DataGridViewCell cell in grid.SelectedCells)
+            {
+                if (cell.RowIndex != grid.RowCount - 1)
+                    if (cell.RowIndex != -1)
+                        grid.Rows.RemoveAt(cell.RowIndex);
+            }
+        }
+
+        private void bSwap23Column_Click(object sender, EventArgs e)
+        {
+            if (grid.ReadOnly) return;
+
+            for (int i = 0;  i < grid.Rows.Count; i++)
+            {
+                var temp = grid.Rows[i].Cells[1].Value?.ToString();
+                grid.Rows[i].Cells[1].Value = grid.Rows[i].Cells[2].Value?.ToString();
+                grid.Rows[i].Cells[2].Value = temp;
+            }
+        }
+
+        private void bSwap12Column_Click(object sender, EventArgs e)
+        {
+            if (grid.ReadOnly) return;
+
+            for (int i = 0; i < grid.Rows.Count; i++)
+            {
+                var temp = grid.Rows[i].Cells[0].Value?.ToString();
+                grid.Rows[i].Cells[0].Value = grid.Rows[i].Cells[1].Value?.ToString();
+                grid.Rows[i].Cells[1].Value = temp;
+            }
+        }
     }
 }
