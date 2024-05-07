@@ -116,17 +116,31 @@ namespace TableComparator
             }
             if (e.Control && e.KeyCode == Keys.C)
             {
-                
+                CopySelectedCellsToClipboard();
             }
             grid.Refresh();
         }
 
         private void CopySelectedCellsToClipboard()
         {
+            var resultStr = "";
+
             foreach (DataGridViewRow row in grid.SelectedRows)
             {
-
+                foreach(DataGridViewCell cell in row.Cells)
+                {
+                    resultStr += cell.Value.ToString() + "\t";
+                }
+                resultStr += "\r\n";
             }
+
+            if (string.IsNullOrEmpty(resultStr)) return;
+
+            try
+            {
+                Clipboard.SetText(resultStr);
+            }
+            catch { }
         }
 
 

@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
             this.col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,20 +41,14 @@
             this.bSwap12Column = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bSwap23Column = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.копироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.вставитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьЗначенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьСтрокиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.chbCompareWithEmptyCells = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bAddRow = new System.Windows.Forms.Button();
             this.bDelRow = new System.Windows.Forms.Button();
+            this.bAddRow = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -63,6 +56,7 @@
             // 
             // grid
             // 
+            this.grid.AllowUserToAddRows = false;
             this.grid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -71,14 +65,14 @@
             this.col1,
             this.col2,
             this.col3});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle2;
             this.grid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.grid.Location = new System.Drawing.Point(1, 0);
             this.grid.Name = "grid";
@@ -199,40 +193,6 @@
             this.bSwap23Column.UseVisualStyleBackColor = false;
             this.bSwap23Column.Click += new System.EventHandler(this.bSwap23Column_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.копироватьToolStripMenuItem,
-            this.вставитьToolStripMenuItem,
-            this.удалитьЗначенияToolStripMenuItem,
-            this.удалитьСтрокиToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 92);
-            // 
-            // копироватьToolStripMenuItem
-            // 
-            this.копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
-            this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.копироватьToolStripMenuItem.Text = "Копировать";
-            // 
-            // вставитьToolStripMenuItem
-            // 
-            this.вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
-            this.вставитьToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.вставитьToolStripMenuItem.Text = "Вставить";
-            // 
-            // удалитьЗначенияToolStripMenuItem
-            // 
-            this.удалитьЗначенияToolStripMenuItem.Name = "удалитьЗначенияToolStripMenuItem";
-            this.удалитьЗначенияToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.удалитьЗначенияToolStripMenuItem.Text = "Удалить значения";
-            // 
-            // удалитьСтрокиToolStripMenuItem
-            // 
-            this.удалитьСтрокиToolStripMenuItem.Name = "удалитьСтрокиToolStripMenuItem";
-            this.удалитьСтрокиToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.удалитьСтрокиToolStripMenuItem.Text = "Удалить строки";
-            // 
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -265,17 +225,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Таблица";
             // 
-            // bAddRow
-            // 
-            this.bAddRow.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.bAddRow.Location = new System.Drawing.Point(6, 19);
-            this.bAddRow.Name = "bAddRow";
-            this.bAddRow.Size = new System.Drawing.Size(124, 25);
-            this.bAddRow.TabIndex = 0;
-            this.bAddRow.Text = "+ добавить строку";
-            this.bAddRow.UseVisualStyleBackColor = false;
-            this.bAddRow.Click += new System.EventHandler(this.bAddRow_Click);
-            // 
             // bDelRow
             // 
             this.bDelRow.BackColor = System.Drawing.SystemColors.MenuBar;
@@ -286,6 +235,17 @@
             this.bDelRow.Text = "- удалить стороку(и)";
             this.bDelRow.UseVisualStyleBackColor = false;
             this.bDelRow.Click += new System.EventHandler(this.bDelRow_Click);
+            // 
+            // bAddRow
+            // 
+            this.bAddRow.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.bAddRow.Location = new System.Drawing.Point(6, 19);
+            this.bAddRow.Name = "bAddRow";
+            this.bAddRow.Size = new System.Drawing.Size(124, 25);
+            this.bAddRow.TabIndex = 0;
+            this.bAddRow.Text = "+ добавить строку";
+            this.bAddRow.UseVisualStyleBackColor = false;
+            this.bAddRow.Click += new System.EventHandler(this.bAddRow_Click);
             // 
             // groupBox2
             // 
@@ -332,7 +292,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -355,11 +314,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col2;
         private System.Windows.Forms.DataGridViewTextBoxColumn col3;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem копироватьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem вставитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem удалитьЗначенияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem удалитьСтрокиToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox chbCompareWithEmptyCells;
         private System.Windows.Forms.GroupBox groupBox1;
