@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -18,7 +19,10 @@ namespace TableComparator.Classes
         public static DelProgressChange CalcEvent;
         public static Action CalcFinished;
 
-        private static List<string> _Messages = new List<string>();      
+        private static List<string> _Messages = new List<string>();
+        
+        private static Color ColorEquvivalData = Color.FromArgb(255, 85, 85); // красный полупрозначный
+        private static Color ColorNotEquvivalData = Color.FromArgb(152, 251, 152); //зеленый полупрозрачный
 
         public static void CompareEachWithEachAndRecolor(DataGridView grid, string columnCompareMain,
             string columnCompareSlave, string columnOut, CancellationToken cancellation)
@@ -55,11 +59,11 @@ namespace TableComparator.Classes
                 if (isUniq)
                 {
                     grid.Rows[resColInd].Cells[columnOut].Value = grid.Rows[i].Cells[columnCompareMain].Value;
-                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Green;
+                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = ColorNotEquvivalData;
                     resColInd++;
                 }
                 else
-                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Red;
+                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = ColorEquvivalData;
 
                 ProgressChange?.Invoke(i * 100 / grid.RowCount);
                 Console.WriteLine(i * 100 / grid.RowCount);
@@ -94,11 +98,11 @@ namespace TableComparator.Classes
                 if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() != grid.Rows[i].Cells[columnCompareSlave].Value.ToString())
                 {
                     grid.Rows[resColInd].Cells[columnOut].Value = grid.Rows[i].Cells[columnCompareMain].Value;
-                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Green;
+                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = ColorNotEquvivalData;
                     resColInd++;
                 }
                 else
-                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = Color.Red;
+                    grid.Rows[i].Cells[columnCompareMain].Style.BackColor = ColorEquvivalData;
 
                 ProgressChange?.Invoke(i * 100 / grid.RowCount);
 
