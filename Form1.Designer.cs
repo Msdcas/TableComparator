@@ -48,10 +48,24 @@
             this.bAddRow = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cmCompareMethod = new System.Windows.Forms.ComboBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.заполнитьТаблицуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьMACПоIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.фильтрацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПробелыВКонцедляВсехToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сравниваемоеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сравнивающееToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.уникальныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сравниваемоеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.сравнивающееToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.уникальныеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grid
@@ -74,9 +88,9 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid.DefaultCellStyle = dataGridViewCellStyle2;
             this.grid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.grid.Location = new System.Drawing.Point(1, 0);
+            this.grid.Location = new System.Drawing.Point(1, 27);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(633, 427);
+            this.grid.Size = new System.Drawing.Size(633, 400);
             this.grid.TabIndex = 0;
             this.grid.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.grid_RowPrePaint);
             this.grid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grid_KeyUp);
@@ -105,7 +119,7 @@
             this.bCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bCompare.BackColor = System.Drawing.SystemColors.Window;
             this.bCompare.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bCompare.Location = new System.Drawing.Point(11, 79);
+            this.bCompare.Location = new System.Drawing.Point(9, 106);
             this.bCompare.Name = "bCompare";
             this.bCompare.Size = new System.Drawing.Size(153, 36);
             this.bCompare.TabIndex = 1;
@@ -116,7 +130,7 @@
             // bStop
             // 
             this.bStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bStop.Location = new System.Drawing.Point(170, 81);
+            this.bStop.Location = new System.Drawing.Point(168, 108);
             this.bStop.Name = "bStop";
             this.bStop.Size = new System.Drawing.Size(29, 32);
             this.bStop.TabIndex = 2;
@@ -131,7 +145,7 @@
             this.cmFilterMethod.Items.AddRange(new object[] {
             "Построчно",
             "Каждый с каждым"});
-            this.cmFilterMethod.Location = new System.Drawing.Point(11, 29);
+            this.cmFilterMethod.Location = new System.Drawing.Point(9, 29);
             this.cmFilterMethod.Name = "cmFilterMethod";
             this.cmFilterMethod.Size = new System.Drawing.Size(153, 21);
             this.cmFilterMethod.TabIndex = 3;
@@ -141,7 +155,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 16);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 4;
@@ -151,7 +165,7 @@
             // 
             this.bCopyResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bCopyResult.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.bCopyResult.Location = new System.Drawing.Point(6, 19);
+            this.bCopyResult.Location = new System.Drawing.Point(6, 15);
             this.bCopyResult.Name = "bCopyResult";
             this.bCopyResult.Size = new System.Drawing.Size(153, 23);
             this.bCopyResult.TabIndex = 5;
@@ -163,7 +177,7 @@
             // 
             this.bSwap12Column.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bSwap12Column.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.bSwap12Column.Location = new System.Drawing.Point(6, 77);
+            this.bSwap12Column.Location = new System.Drawing.Point(6, 73);
             this.bSwap12Column.Name = "bSwap12Column";
             this.bSwap12Column.Size = new System.Drawing.Size(188, 23);
             this.bSwap12Column.TabIndex = 6;
@@ -174,7 +188,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(640, 374);
+            this.richTextBox1.Location = new System.Drawing.Point(643, 374);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(211, 53);
@@ -185,7 +199,7 @@
             // 
             this.bSwap23Column.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bSwap23Column.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.bSwap23Column.Location = new System.Drawing.Point(6, 48);
+            this.bSwap23Column.Location = new System.Drawing.Point(6, 44);
             this.bSwap23Column.Name = "bSwap23Column";
             this.bSwap23Column.Size = new System.Drawing.Size(188, 23);
             this.bSwap23Column.TabIndex = 8;
@@ -196,16 +210,17 @@
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(11, 105);
+            this.progressBar1.Location = new System.Drawing.Point(10, 133);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(152, 13);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 10;
             // 
             // chbCompareWithEmptyCells
             // 
             this.chbCompareWithEmptyCells.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chbCompareWithEmptyCells.AutoSize = true;
-            this.chbCompareWithEmptyCells.Location = new System.Drawing.Point(13, 56);
+            this.chbCompareWithEmptyCells.Location = new System.Drawing.Point(11, 83);
             this.chbCompareWithEmptyCells.Name = "chbCompareWithEmptyCells";
             this.chbCompareWithEmptyCells.Size = new System.Drawing.Size(194, 17);
             this.chbCompareWithEmptyCells.TabIndex = 11;
@@ -218,7 +233,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.bDelRow);
             this.groupBox1.Controls.Add(this.bAddRow);
-            this.groupBox1.Location = new System.Drawing.Point(640, 168);
+            this.groupBox1.Location = new System.Drawing.Point(642, 184);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(211, 76);
             this.groupBox1.TabIndex = 12;
@@ -253,9 +268,9 @@
             this.groupBox2.Controls.Add(this.bCopyResult);
             this.groupBox2.Controls.Add(this.bSwap23Column);
             this.groupBox2.Controls.Add(this.bSwap12Column);
-            this.groupBox2.Location = new System.Drawing.Point(642, 250);
+            this.groupBox2.Location = new System.Drawing.Point(640, 266);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(211, 118);
+            this.groupBox2.Size = new System.Drawing.Size(211, 102);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Данные";
@@ -263,18 +278,122 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.cmCompareMethod);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.chbCompareWithEmptyCells);
             this.groupBox3.Controls.Add(this.bCompare);
             this.groupBox3.Controls.Add(this.bStop);
             this.groupBox3.Controls.Add(this.cmFilterMethod);
             this.groupBox3.Controls.Add(this.progressBar1);
-            this.groupBox3.Location = new System.Drawing.Point(640, 0);
+            this.groupBox3.Location = new System.Drawing.Point(642, 27);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(213, 127);
+            this.groupBox3.Size = new System.Drawing.Size(211, 152);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Расчет";
+            // 
+            // cmCompareMethod
+            // 
+            this.cmCompareMethod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmCompareMethod.FormattingEnabled = true;
+            this.cmCompareMethod.Items.AddRange(new object[] {
+            "Значения целиком",
+            "Сравниваемое как искомая подстр",
+            "Сравнивающее как искомая подстр"});
+            this.cmCompareMethod.Location = new System.Drawing.Point(9, 56);
+            this.cmCompareMethod.Name = "cmCompareMethod";
+            this.cmCompareMethod.Size = new System.Drawing.Size(189, 21);
+            this.cmCompareMethod.TabIndex = 12;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.заполнитьТаблицуToolStripMenuItem,
+            this.фильтрацияToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(853, 24);
+            this.menuStrip1.TabIndex = 15;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // заполнитьТаблицуToolStripMenuItem
+            // 
+            this.заполнитьТаблицуToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьMACПоIPToolStripMenuItem});
+            this.заполнитьТаблицуToolStripMenuItem.Name = "заполнитьТаблицуToolStripMenuItem";
+            this.заполнитьТаблицуToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.заполнитьТаблицуToolStripMenuItem.Text = "Данные";
+            // 
+            // добавитьMACПоIPToolStripMenuItem
+            // 
+            this.добавитьMACПоIPToolStripMenuItem.Name = "добавитьMACПоIPToolStripMenuItem";
+            this.добавитьMACПоIPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.добавитьMACПоIPToolStripMenuItem.Text = "Сетевая таблица";
+            // 
+            // фильтрацияToolStripMenuItem
+            // 
+            this.фильтрацияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.удалитьПробелыВКонцедляВсехToolStripMenuItem,
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem});
+            this.фильтрацияToolStripMenuItem.Name = "фильтрацияToolStripMenuItem";
+            this.фильтрацияToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.фильтрацияToolStripMenuItem.Text = "Операции";
+            // 
+            // удалитьПробелыВКонцедляВсехToolStripMenuItem
+            // 
+            this.удалитьПробелыВКонцедляВсехToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сравниваемоеToolStripMenuItem,
+            this.сравнивающееToolStripMenuItem,
+            this.уникальныеToolStripMenuItem});
+            this.удалитьПробелыВКонцедляВсехToolStripMenuItem.Name = "удалитьПробелыВКонцедляВсехToolStripMenuItem";
+            this.удалитьПробелыВКонцедляВсехToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.удалитьПробелыВКонцедляВсехToolStripMenuItem.Text = "Удалить пробелы в конце (для всех)";
+            // 
+            // удалитьПробелыВНачаледляВсехToolStripMenuItem
+            // 
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сравниваемоеToolStripMenuItem1,
+            this.сравнивающееToolStripMenuItem1,
+            this.уникальныеToolStripMenuItem1});
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem.Name = "удалитьПробелыВНачаледляВсехToolStripMenuItem";
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem.Text = "Удалить пробелы в начале (для всех)";
+            // 
+            // сравниваемоеToolStripMenuItem
+            // 
+            this.сравниваемоеToolStripMenuItem.Name = "сравниваемоеToolStripMenuItem";
+            this.сравниваемоеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сравниваемоеToolStripMenuItem.Text = "Сравниваемое";
+            // 
+            // сравнивающееToolStripMenuItem
+            // 
+            this.сравнивающееToolStripMenuItem.Name = "сравнивающееToolStripMenuItem";
+            this.сравнивающееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сравнивающееToolStripMenuItem.Text = "Сравнивающее";
+            // 
+            // уникальныеToolStripMenuItem
+            // 
+            this.уникальныеToolStripMenuItem.Name = "уникальныеToolStripMenuItem";
+            this.уникальныеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.уникальныеToolStripMenuItem.Text = "Уникальные";
+            // 
+            // сравниваемоеToolStripMenuItem1
+            // 
+            this.сравниваемоеToolStripMenuItem1.Name = "сравниваемоеToolStripMenuItem1";
+            this.сравниваемоеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.сравниваемоеToolStripMenuItem1.Text = "Сравниваемое";
+            // 
+            // сравнивающееToolStripMenuItem1
+            // 
+            this.сравнивающееToolStripMenuItem1.Name = "сравнивающееToolStripMenuItem1";
+            this.сравнивающееToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.сравнивающееToolStripMenuItem1.Text = "Сравнивающее";
+            // 
+            // уникальныеToolStripMenuItem1
+            // 
+            this.уникальныеToolStripMenuItem1.Name = "уникальныеToolStripMenuItem1";
+            this.уникальныеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.уникальныеToolStripMenuItem1.Text = "Уникальные";
             // 
             // Form1
             // 
@@ -287,6 +406,8 @@
             this.Controls.Add(this.grid);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Simple data comparator";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -296,7 +417,10 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -321,6 +445,19 @@
         private System.Windows.Forms.Button bAddRow;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem заполнитьТаблицуToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cmCompareMethod;
+        private System.Windows.Forms.ToolStripMenuItem добавитьMACПоIPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem фильтрацияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьПробелыВКонцедляВсехToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сравниваемоеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сравнивающееToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem уникальныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьПробелыВНачаледляВсехToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сравниваемоеToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem сравнивающееToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem уникальныеToolStripMenuItem1;
     }
 }
 
