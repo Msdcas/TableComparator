@@ -29,17 +29,15 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BFillTable = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.c_ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.c_cname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.c_MAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -51,40 +49,23 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IP,
-            this.CName,
-            this.MAC});
+            this.c_ip,
+            this.c_cname,
+            this.c_MAC});
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(544, 331);
+            this.dataGridView1.Size = new System.Drawing.Size(544, 265);
             this.dataGridView1.TabIndex = 0;
             // 
-            // IP
+            // BFillTable
             // 
-            this.IP.HeaderText = "c_ip";
-            this.IP.Name = "IP";
-            this.IP.Width = 150;
-            // 
-            // CName
-            // 
-            this.CName.HeaderText = "c_cname";
-            this.CName.Name = "CName";
-            this.CName.Width = 200;
-            // 
-            // MAC
-            // 
-            this.MAC.HeaderText = "c_MAC";
-            this.MAC.Name = "MAC";
-            this.MAC.Width = 150;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 46);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(219, 28);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Загрузить arp таблицу";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BFillTable.Location = new System.Drawing.Point(6, 12);
+            this.BFillTable.Name = "BFillTable";
+            this.BFillTable.Size = new System.Drawing.Size(232, 28);
+            this.BFillTable.TabIndex = 1;
+            this.BFillTable.Text = "Загрузить arp таблицей";
+            this.BFillTable.UseVisualStyleBackColor = true;
+            this.BFillTable.Click += new System.EventHandler(this.BFillTable_Click);
             // 
             // button2
             // 
@@ -92,7 +73,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(148, 26);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Заполнить таблицу";
+            this.button2.Text = "Заполнить пустые ячейки";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -101,7 +82,7 @@
             this.groupBox1.Controls.Add(this.maskedTextBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(551, 89);
+            this.groupBox1.Location = new System.Drawing.Point(551, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(246, 87);
             this.groupBox1.TabIndex = 3;
@@ -128,37 +109,37 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.BFillTable);
             this.groupBox2.Location = new System.Drawing.Point(551, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(246, 83);
+            this.groupBox2.Size = new System.Drawing.Size(246, 48);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
-            // textBox1
+            // c_ip
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(128, 20);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "localhost";
+            this.c_ip.HeaderText = "IP";
+            this.c_ip.Name = "c_ip";
+            this.c_ip.Width = 150;
             // 
-            // label2
+            // c_cname
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Host";
+            this.c_cname.HeaderText = "CNAME";
+            this.c_cname.Name = "c_cname";
+            this.c_cname.Width = 200;
+            // 
+            // c_MAC
+            // 
+            this.c_MAC.HeaderText = "MAC";
+            this.c_MAC.Name = "c_MAC";
+            this.c_MAC.Width = 150;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 360);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(801, 266);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -168,7 +149,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -176,16 +156,14 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MAC;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BFillTable;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn c_ip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn c_cname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn c_MAC;
     }
 }
