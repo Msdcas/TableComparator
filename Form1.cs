@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -211,6 +212,12 @@ namespace TableComparator
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            foreach (Comparator.CompareMethods method in Enum.GetValues(typeof(Comparator.CompareMethods)))
+            {
+                cmCompareMethod.Items.Add(method.ToString().Replace('_', ' '));
+            }
+            if (cmCompareMethod.Items.Count != 0) cmCompareMethod.Text = cmCompareMethod.Items[0].ToString();
+
             Comparator.ProgressChange = sendParam => HandleEvent(progressBar1, HandlerProgressChange, sendParam);
             Comparator.CalcEvent = sendParam => HandleEvent(richTextBox1, HandlerCalcEvent, sendParam);
             Comparator.CalcFinished = () => HandleEvent(bCompare, HandlerCalcFinished, null);
@@ -330,6 +337,17 @@ namespace TableComparator
                 grid.Rows[i].Cells[0].Value = grid.Rows[i].Cells[1].Value?.ToString();
                 grid.Rows[i].Cells[1].Value = temp;
             }
+        }
+
+        private void добавитьMACПоIPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
+        }
+
+        private void cmCompareMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Comparator.CurrentCompareMethod = cmCompareMethod.SelectedIndex;
         }
     }
 }

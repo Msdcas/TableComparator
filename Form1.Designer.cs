@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
             this.col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +54,10 @@
             this.добавитьMACПоIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.фильтрацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьПробелыВКонцедляВсехToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПробелыВНачаледляВсехToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сравниваемоеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сравнивающееToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.уникальныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПробелыВНачаледляВсехToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сравниваемоеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.сравнивающееToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.уникальныеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,14 +79,14 @@
             this.col1,
             this.col2,
             this.col3});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle3;
             this.grid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.grid.Location = new System.Drawing.Point(1, 27);
             this.grid.Name = "grid";
@@ -296,14 +296,11 @@
             // 
             this.cmCompareMethod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmCompareMethod.FormattingEnabled = true;
-            this.cmCompareMethod.Items.AddRange(new object[] {
-            "Значения целиком",
-            "Сравниваемое как искомая подстр",
-            "Сравнивающее как искомая подстр"});
             this.cmCompareMethod.Location = new System.Drawing.Point(9, 56);
             this.cmCompareMethod.Name = "cmCompareMethod";
             this.cmCompareMethod.Size = new System.Drawing.Size(189, 21);
             this.cmCompareMethod.TabIndex = 12;
+            this.cmCompareMethod.SelectedIndexChanged += new System.EventHandler(this.cmCompareMethod_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -329,6 +326,7 @@
             this.добавитьMACПоIPToolStripMenuItem.Name = "добавитьMACПоIPToolStripMenuItem";
             this.добавитьMACПоIPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.добавитьMACПоIPToolStripMenuItem.Text = "Сетевая таблица";
+            this.добавитьMACПоIPToolStripMenuItem.Click += new System.EventHandler(this.добавитьMACПоIPToolStripMenuItem_Click);
             // 
             // фильтрацияToolStripMenuItem
             // 
@@ -349,6 +347,24 @@
             this.удалитьПробелыВКонцедляВсехToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.удалитьПробелыВКонцедляВсехToolStripMenuItem.Text = "Удалить пробелы в конце (для всех)";
             // 
+            // сравниваемоеToolStripMenuItem
+            // 
+            this.сравниваемоеToolStripMenuItem.Name = "сравниваемоеToolStripMenuItem";
+            this.сравниваемоеToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.сравниваемоеToolStripMenuItem.Text = "Сравниваемое";
+            // 
+            // сравнивающееToolStripMenuItem
+            // 
+            this.сравнивающееToolStripMenuItem.Name = "сравнивающееToolStripMenuItem";
+            this.сравнивающееToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.сравнивающееToolStripMenuItem.Text = "Сравнивающее";
+            // 
+            // уникальныеToolStripMenuItem
+            // 
+            this.уникальныеToolStripMenuItem.Name = "уникальныеToolStripMenuItem";
+            this.уникальныеToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.уникальныеToolStripMenuItem.Text = "Уникальные";
+            // 
             // удалитьПробелыВНачаледляВсехToolStripMenuItem
             // 
             this.удалитьПробелыВНачаледляВсехToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -359,40 +375,22 @@
             this.удалитьПробелыВНачаледляВсехToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.удалитьПробелыВНачаледляВсехToolStripMenuItem.Text = "Удалить пробелы в начале (для всех)";
             // 
-            // сравниваемоеToolStripMenuItem
-            // 
-            this.сравниваемоеToolStripMenuItem.Name = "сравниваемоеToolStripMenuItem";
-            this.сравниваемоеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сравниваемоеToolStripMenuItem.Text = "Сравниваемое";
-            // 
-            // сравнивающееToolStripMenuItem
-            // 
-            this.сравнивающееToolStripMenuItem.Name = "сравнивающееToolStripMenuItem";
-            this.сравнивающееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сравнивающееToolStripMenuItem.Text = "Сравнивающее";
-            // 
-            // уникальныеToolStripMenuItem
-            // 
-            this.уникальныеToolStripMenuItem.Name = "уникальныеToolStripMenuItem";
-            this.уникальныеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.уникальныеToolStripMenuItem.Text = "Уникальные";
-            // 
             // сравниваемоеToolStripMenuItem1
             // 
             this.сравниваемоеToolStripMenuItem1.Name = "сравниваемоеToolStripMenuItem1";
-            this.сравниваемоеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.сравниваемоеToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.сравниваемоеToolStripMenuItem1.Text = "Сравниваемое";
             // 
             // сравнивающееToolStripMenuItem1
             // 
             this.сравнивающееToolStripMenuItem1.Name = "сравнивающееToolStripMenuItem1";
-            this.сравнивающееToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.сравнивающееToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.сравнивающееToolStripMenuItem1.Text = "Сравнивающее";
             // 
             // уникальныеToolStripMenuItem1
             // 
             this.уникальныеToolStripMenuItem1.Name = "уникальныеToolStripMenuItem1";
-            this.уникальныеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.уникальныеToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.уникальныеToolStripMenuItem1.Text = "Уникальные";
             // 
             // Form1

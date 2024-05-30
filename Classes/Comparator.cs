@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -9,7 +9,39 @@ namespace TableComparator.Classes
 {        /// при сравнении массив цвета всегда привязан ко 1му столбцу и считается определяющим есть ли эквивалент во 2м столбце
 
     public static class Comparator
-{
+    {
+        public enum CompareMethods
+        {
+            Значения_целиком,                   // index = 0
+            Сравниваемое_как_искомая_подстр,    // index = 1
+            Сравнивающее_как_искомая_подстр     // index = 2
+        }
+        // index of CompareMethods
+        private static int _IndexCompareMethod = 0;
+        public static int CurrentCompareMethod 
+        {
+            get { return _IndexCompareMethod; }
+            set
+            {
+                Comparison = null;
+                switch (value)
+                {
+                    case 0:
+                        Comparison = (val1, val2) => val1 == val2; break;
+                    case 1:
+                        Comparison = (val1, val2) => val2.Contains(val1); break;
+                    case 2:
+                        Comparison = (val1, val2) => val1.Contains(val2); ; break;       
+                }
+                _IndexCompareMethod = value;
+            }
+        }
+        private delegate bool DelegCompareMethod(string val1, string val2);
+        private static DelegCompareMethod Comparison;
+
+
+
+
         public static bool CompareWithEmptyCells = false;
 
         public delegate void DProgressChange(int progress);
@@ -23,6 +55,9 @@ namespace TableComparator.Classes
         
         private static Color ColorEquvivalData = Color.FromArgb(255, 85, 85); // красный полупрозначный
         private static Color ColorNotEquvivalData = Color.FromArgb(152, 251, 152); //зеленый полупрозрачный
+
+
+
 
         public static void CompareEachWithEachAndRecolor(DataGridView grid, string columnCompareMain,
             string columnCompareSlave, string columnOut, CancellationToken cancellation)
@@ -47,9 +82,11 @@ namespace TableComparator.Classes
                         AddError($">Найдена пустая ячейка во втором столбце в строке {j+1}");
                         if (!CompareWithEmptyCells) continue;
                     }
-
-                    if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() ==
-                        grid.Rows[j].Cells[columnCompareSlave].Value?.ToString())
+                    
+                    if (Comparison.Invoke(grid.Rows[i].Cells[columnCompareMain].Value.ToString(),
+                        grid.Rows[j].Cells[columnCompareSlave].Value?.ToString()))
+                    //if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() ==
+                    //    grid.Rows[j].Cells[columnCompareSlave].Value?.ToString())
                     {
                         isUniq = false;
                         break;
