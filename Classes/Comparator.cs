@@ -132,7 +132,10 @@ namespace TableComparator.Classes
                     AddError($">Найдена пустая ячейка в {i + 1} строке");
                     if (!CompareWithEmptyCells) continue;
                 }
-                if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() != grid.Rows[i].Cells[columnCompareSlave].Value.ToString())
+
+                //if (grid.Rows[i].Cells[columnCompareMain].Value.ToString() != grid.Rows[i].Cells[columnCompareSlave].Value.ToString())
+                if (Comparison.Invoke(grid.Rows[i].Cells[columnCompareSlave].Value.ToString(),
+                    grid.Rows[i].Cells[columnCompareMain].Value.ToString()))
                 {
                     grid.Rows[resColInd].Cells[columnOut].Value = grid.Rows[i].Cells[columnCompareMain].Value;
                     grid.Rows[i].Cells[columnCompareMain].Style.BackColor = ColorNotEquvivalData;
